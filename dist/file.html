@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文件上传</title>
+</head>
+<body>
+    <button onclick="select()">点击选择上传文件</button>
+    <script>
+        function select(e){
+            let input = document.createElement('input')
+            input.type = 'file'
+            input.onchange = function(){
+                const file = this.files[0]
+                const size = 1024*1024
+                const fileReader = new FileReader()
+                fileReader.readAsText(file.slice(0,59),'utf8')
+                fileReader.onload = ()=>{
+                    console.log(fileReader.result)
+                }
+            }
+            input.click()
+        }
+    </script>
+    <script>
+        function curry(){}
+
+    </script>
+</body>
+</html>

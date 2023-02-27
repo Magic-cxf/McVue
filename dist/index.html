@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="app">
+      子组件
+      <button click="test">实现@click方法</button>
+      <component is="my-tip1"></component>
+      <my-button></my-button>
+      <my-tip1></my-tip1>
+      <my-tip2></my-tip2>
+    </div>
+    <script src="./vue.js"></script>
+    <script>
+      Vue.component(
+        "my-tip1",
+        Vue.extend({
+          template: `<h2>哈哈 全局组件 extend方式</h2>`,
+        })
+      );
+      Vue.component("my-tip2", {
+        template: `<h2>哈哈  {{name}}全局组件 对象方式</h2>`,
+        data(){
+          return {
+            name:'123456'
+          }
+        }
+      });
+      const vm = new Vue({
+        el: "#app",
+        data: {
+          name: "cxf",
+        },
+        components: {
+          "my-button": {
+            template: `<button>点击我</button>`,
+          },
+        },
+        methods:{
+          test(){
+            console.log(this.name)
+          }
+        }
+      }); 
+      console.log(vm)
+      const sub = Vue.extend({
+        template:'<button>提交表单</button>'
+      })
+
+      const instance = new sub()
+      instance.$mount()
+  
+
+      vm.$el.appendChild(instance.$el)
+  
+    </script>
+  </body>
+</html>
